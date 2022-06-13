@@ -13,6 +13,7 @@ import java.util.List;
 @Slf4j
 @Service
 public class Receiver {
+
     @KafkaListener(id = "kafka-batch", topics = "bonus-calculate")
     public void receive(@Payload List<String> messages,
                         @Header(KafkaHeaders.RECEIVED_PARTITION_ID) List<Integer> partitions,

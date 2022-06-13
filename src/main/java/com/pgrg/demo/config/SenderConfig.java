@@ -1,5 +1,6 @@
 package com.pgrg.demo.config;
 
+import com.pgrg.demo.model.Transactions;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,7 +34,17 @@ public class SenderConfig {
     }
 
     @Bean
+    public ProducerFactory<String, Transactions> producerFactory2() {
+        return new DefaultKafkaProducerFactory<>(producerConfigs());
+    }
+
+    @Bean
     public KafkaTemplate<String, String> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
+    }
+
+    @Bean
+    public KafkaTemplate<String, Transactions> kafkaTemplate2() {
+        return new KafkaTemplate<>(producerFactory2());
     }
 }
